@@ -2,7 +2,7 @@
 import { createRequire } from 'module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
 import { spawn } from 'child_process';
 import path from 'path';
-const [mode, arg, fpsArg, scaleArg] = process.argv.slice(2);
+const [mode, arg, fpsArg, scaleArg, fromArg, toArg] = process.argv.slice(2);
 const fps = +(fpsArg||60), scale = +(scaleArg||1);
 const browser = await chromium.launch({ args:['--disable-web-security','--allow-file-access-from-files','--force-color-profile=srgb'] });
 const page = await browser.newPage({ viewport:{width:1920,height:1080}, deviceScaleFactor: scale });
@@ -19,11 +19,12 @@ if (mode==='stills') {
   const ff = spawn('ffmpeg',['-y','-v','error','-f','image2pipe','-framerate',String(fps),'-c:v','png','-i','-',
     '-c:v','libx264','-preset','slow','-crf','14','-pix_fmt','yuv420p','-tune','grain','-movflags','+faststart', arg],{stdio:['pipe','inherit','inherit']});
   const t0=Date.now();
-  for (let i=0;i<N;i++){ const t=i/fps;
+  const F0=+(fromArg||0), F1=Math.min(N, +(toArg||N));
+  for (let i=F0;i<F1;i++){ const t=i/fps;
     await page.evaluate(([t,f])=>render(t,f), [t,i]);
     const buf = await page.screenshot({ type:'png' });
     if(!ff.stdin.write(buf)) await new Promise(r=>ff.stdin.once('drain',r));
-    if(i%60===0) console.log(`frame ${i}/${N} ${((Date.now()-t0)/1000).toFixed(0)}s`);
+    if(i%60===0) console.log(`frame ${i}/${F1} ${((Date.now()-t0)/1000).toFixed(0)}s`);
   }
   ff.stdin.end(); await new Promise(r=>ff.on('close',r));
 }

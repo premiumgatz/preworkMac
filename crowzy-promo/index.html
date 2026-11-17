@@ -97,7 +97,7 @@ body{font-family:'Figtree',system-ui,sans-serif;color:#fff;-webkit-font-smoothin
 .avs{display:flex;margin-top:34px;align-items:center}
 .av{width:62px;height:62px;border-radius:50%;border:3px solid #17122b;margin-left:-14px;display:flex;align-items:center;justify-content:center;font-weight:750;font-size:24px}
 .av:first-child{margin-left:0}
-.avcap{margin-left:18px;font-size:22px;color:rgba(255,255,255,.65)}
+.avcap{margin-left:18px;font-size:22px;color:rgba(255,255,255,.65);white-space:nowrap}
 .badge{position:absolute;right:48px;bottom:46px;display:flex;align-items:center;gap:12px;padding:16px 26px;border-radius:999px;background:#10b981;font-weight:750;font-size:27px;box-shadow:0 10px 40px rgba(16,185,129,.45);opacity:0}
 .badge svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .spark{position:absolute;width:12px;height:12px;border-radius:50%;margin:-6px 0 0 -6px;opacity:0}
@@ -430,7 +430,7 @@ window.render=function(t,frame){
     const okT=2.15; $('#mfillOk').style.opacity=tw(l,okT,okT+.3,0,1);
     AVEL.forEach((a,i)=>{ let p=1; if(i===6)p=clamp((l-s1)/.45); if(i===7)p=clamp((l-s2)/.45); if(i<6)p=clamp((l-.2-i*.05)/.45);
       st(a,{transform:`scale(${E.outB(p)})`,opacity:Math.min(1,p*2)}); });
-    $('#avcap').textContent= l<okT? 'van a ir' : 'van a ir · ¡Mínimo alcanzado! La actividad sale.';
+    $('#avcap').textContent= l<okT? 'van a ir' : 'van a ir · ¡Mínimo alcanzado!';
     const bp=clamp((l-okT)/.5);
     st($('#badge'),{opacity:Math.min(1,bp*2.5),transform:`scale(${E.outB(bp)}) translateY(${(1-E.outQ(bp))*20}px)`});
     SPARKS.forEach((s,i)=>{const a=i/16*Math.PI*2+.2, p=clamp((l-okT-.05)/.8), d=E.outQ(p)*(150+ (i%3)*40);
