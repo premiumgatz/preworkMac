@@ -40,3 +40,13 @@ y botón de papelera para borrar inscripciones en `/admin`.
    - `bec8eaf`: email con logo y PDF, sin papelera.
 
 Los datos de las inscripciones no están en estas copias: para guardarlos, usar "Download CSV" en `/admin`.
+
+## Copia de seguridad 3 (19 nov 2026, con la previsualización de WhatsApp)
+
+Estado guardado: todo lo de la copia 2 más la foto de la oficina en la previsualización
+de enlaces (og:image con dirección completa en `/` y `/open-day`).
+
+1. **Proyecto duplicado en Lovable:** "BACKUP 3 Drumelia Open Day (19 nov, con previsualizacion WhatsApp)".
+2. **GitHub** (`premiumgatz/drumelia-email-capture`, rama `main`): commit `0ae9ce2`.
+
+Los datos de las inscripciones no están en estas copias: para guardarlos, usar "Download CSV" en `/admin`.
